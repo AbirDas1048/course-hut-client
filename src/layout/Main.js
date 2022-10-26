@@ -8,7 +8,7 @@ import './Main.css';
 const Main = () => {
     const { mood } = useContext(AuthContext);
     return (
-        <div className={mood ? 'light-bg-1' : 'dark-bg-1 dark-text-1'}>
+        <div>
             <Header></Header>
             <Outlet></Outlet>
             <Footer></Footer>

@@ -9,7 +9,7 @@ const Header = () => {
     const { mood, setMood } = useContext(AuthContext);
 
     return (
-        <Navbar collapseOnSelect sticky='top' expand="lg" className='dark-bg-1 dark-text-1'>
+        <Navbar collapseOnSelect sticky='top' expand="lg" bg="light" variant='light'>
             <Container>
                 <Navbar.Brand href="/">
                     <img
@@ -35,7 +35,6 @@ const Header = () => {
                             type="switch"
                             id="custom-switch"
                             label={mood ? "Light" : "Dark"}
-                            className={mood ? "text-dark" : "text-light"}
                         />
                     </Form>
                 </Navbar.Collapse>
