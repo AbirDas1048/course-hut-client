@@ -15,10 +15,12 @@ export const routes = createBrowserRouter([
         children: [
             {
                 path: '/',
+                loader: () => fetch('http://localhost:5000/featuredCourse'),
                 element: <Home></Home>
             },
             {
                 path: '/home',
+                loader: () => fetch('http://localhost:5000/featuredCourse'),
                 element: <Home></Home>
             },
             {
@@ -48,7 +50,14 @@ export const routes = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignUp></SignUp>
+            },
+            {
+                path: '*',
+                element: <div className="text-center text-danger my-5">
+                    <h3>404 Page Not Found</h3>
+                </div>
             }
         ]
     }
+
 ])
