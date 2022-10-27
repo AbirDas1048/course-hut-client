@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { FaStarHalfAlt, FaRegClock, FaArrowRight } from 'react-icons/fa'
+import { FaStarHalfAlt, FaRegClock } from 'react-icons/fa'
 
 const Course = ({ course }) => {
     const { id, name, image, subTitle, ratings, duration, instructor } = course;
@@ -12,7 +12,7 @@ const Course = ({ course }) => {
     }
     return (
         <Col>
-            <Card>
+            <Card className='h-100'>
                 <Card.Img variant="top" src={image} />
                 <Card.Body>
                     <Card.Title className='my-2'>{name}</Card.Title>
@@ -29,9 +29,10 @@ const Course = ({ course }) => {
                     </div>
 
                     <p>Instructor: {instructor}</p>
-                    <Button variant='primary' onClick={handleNavigate}>Details <FaArrowRight></FaArrowRight></Button>
-
                 </Card.Body>
+                <Card.Footer className='text-center'>
+                    <Button variant='primary' size='sm' onClick={handleNavigate}>Details</Button>
+                </Card.Footer>
             </Card>
         </Col>
     );

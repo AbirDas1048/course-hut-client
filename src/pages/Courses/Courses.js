@@ -8,13 +8,13 @@ const Courses = () => {
     return (
         <Container className='my-5'>
             <h3 className='text-center mb-3'>Courses</h3>
-            <Row>
+            <Row className='g-4'>
                 <Col md={4}>
                     <Card>
                         <Card.Header className='text-center'>Courses</Card.Header>
                         <ListGroup variant="flush">
                             {
-                                courses.map(course => <NavLink className="list-group-item list-group-item-action {({ isActive }) => isActive ? 'active' : undefined}" key={course.id} to="#">{course.name}</NavLink>)
+                                courses.map(course => <NavLink className="list-group-item list-group-item-action {({ isActive }) => isActive ? 'active' : undefined}" key={course.id} to={`/course/${course.id}`}>{course.name}</NavLink>)
                             }
                         </ListGroup>
 
