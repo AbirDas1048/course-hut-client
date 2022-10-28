@@ -16,30 +16,30 @@ export const routes = createBrowserRouter([
         children: [
             {
                 path: '/',
-                loader: () => fetch('http://localhost:5000/featuredCourse'),
+                loader: () => fetch('https://course-hut-server.vercel.app/featuredCourse'),
                 element: <Home></Home>
             },
             {
                 path: '/home',
-                loader: () => fetch('http://localhost:5000/featuredCourse'),
+                loader: () => fetch('https://course-hut-server.vercel.app/featuredCourse'),
                 element: <Home></Home>
             },
             {
                 path: '/courses',
-                loader: () => fetch('http://localhost:5000/courses'),
+                loader: () => fetch('https://course-hut-server.vercel.app/courses'),
                 element: <Courses></Courses>
             },
             {
                 path: '/course/:courseId',
                 loader: async ({ params }) => {
-                    return fetch(`http://localhost:5000/course/${params.courseId}`);
+                    return fetch(`https://course-hut-server.vercel.app/course/${params.courseId}`);
                 },
                 element: <CourseDetails></CourseDetails>
             },
             {
                 path: '/checkOut/:courseId',
                 loader: async ({ params }) => {
-                    return fetch(`http://localhost:5000/course/${params.courseId}`);
+                    return fetch(`https://course-hut-server.vercel.app/course/${params.courseId}`);
                 },
                 element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>
             },
