@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Tab } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { FaRegClock, FaStarHalfAlt } from 'react-icons/fa';
 import { useLoaderData } from 'react-router-dom';
 

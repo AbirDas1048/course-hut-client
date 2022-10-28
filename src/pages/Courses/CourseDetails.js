@@ -2,10 +2,22 @@ import React from 'react';
 import { Button, Col, Container, Nav, Row, Tab } from 'react-bootstrap';
 import { FaRegClock, FaStarHalfAlt } from 'react-icons/fa';
 import { NavLink, useLoaderData, useNavigate } from 'react-router-dom';
+import ReactDOM from "react-dom";
+import Pdf from "react-to-pdf";
+// import { * } from "react-to-pdf";
+
+
 
 const CourseDetails = () => {
     const [course] = useLoaderData();
     const navigate = useNavigate();
+
+    const ref = React.createRef();
+    const options = {
+        orientation: 'landscape',
+        unit: 'in',
+        format: "A4"
+    };
 
     const handleNavigate = () => {
         navigate(`/checkOut/${course.id}`)
@@ -17,13 +29,24 @@ const CourseDetails = () => {
             {
                 course ?
                     <>
+                        <div className='float-end'>
+                            <Pdf targetRef={ref} filename={`${course.name}.pdf`} options={options}>
+                                {({ toPdf }) => (
+                                    <Button variant='primary' size='sm' onClick={toPdf}>Generate pdf</Button>
+                                )}
+                            </Pdf>
+                        </div>
+
                         <h3 className='text-center mb-3'>Details of <span className='text-primary'>{course.name}</span> </h3>
+
                         <div className="row g-0 bg-light position-relative">
+
                             <div className="col-md-4 mb-md-0 p-md-4">
                                 <img src={course.image} className="w-100" alt="..." />
+
                             </div>
-                            <div className="col-md-8 p-4 ps-md-0">
-                                {/* <h5 className="mt-0">{course.name}</h5> */}
+                            <div className="col-md-8 p-4 ps-md-0" ref={ref}>
+                                <h5 className="mt-0">{course.name}</h5>
                                 <p>{course.subTitle}</p>
                                 <p>Instructor: {course.instructor}</p>
                                 <div className='d-flex justify-content-between my-3'>
@@ -37,9 +60,7 @@ const CourseDetails = () => {
                                     </div>
                                 </div>
                                 <p>{course.description}</p>
-                                <div className="text-center my-3">
-                                    <Button variant='primary' size='sm' onClick={handleNavigate}>Checkout this course</Button>
-                                </div>
+
 
                             </div>
                         </div>
@@ -69,10 +90,15 @@ const CourseDetails = () => {
                         </Tab.Container>
 
                         <div className="text-center my-3">
+                            <Button variant='info' size='sm' onClick={handleNavigate}>Get premium access</Button>
+                        </div>
+
+                        <div className="text-center my-3">
                             <NavLink to='/courses' >
                                 <Button variant='success' size='sm'>See all courses</Button>
                             </NavLink>
                         </div>
+
 
 
                     </>
@@ -83,5 +109,8 @@ const CourseDetails = () => {
         </Container >
     );
 };
+
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<CourseDetails />, rootElement);
 
 export default CourseDetails;
