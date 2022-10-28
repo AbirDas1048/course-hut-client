@@ -1,10 +1,16 @@
 import React from 'react';
 import { Button, Col, Container, Nav, Row, Tab } from 'react-bootstrap';
 import { FaRegClock, FaStarHalfAlt } from 'react-icons/fa';
-import { NavLink, useLoaderData } from 'react-router-dom';
+import { NavLink, useLoaderData, useNavigate } from 'react-router-dom';
 
 const CourseDetails = () => {
     const [course] = useLoaderData();
+    const navigate = useNavigate();
+
+    const handleNavigate = () => {
+        navigate(`/checkOut/${course.id}`)
+        //navigate(`/home`)
+    }
 
     return (
         <Container className='my-5'>
@@ -31,6 +37,10 @@ const CourseDetails = () => {
                                     </div>
                                 </div>
                                 <p>{course.description}</p>
+                                <div className="text-center my-3">
+                                    <Button variant='primary' size='sm' onClick={handleNavigate}>Checkout this course</Button>
+                                </div>
+
                             </div>
                         </div>
                         <h3 className='text-center text-primary my-3'>There are {course.outcomes.length} outcomes</h3>
