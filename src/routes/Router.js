@@ -5,7 +5,6 @@ import Courses from "../pages/Courses/Courses";
 import Blog from "../pages/Other/Blog";
 import FAQ from "../pages/Other/FAQ";
 import Home from "../pages/Other/Home";
-import Profile from "../pages/Other/Profile";
 import SignUp from "../pages/SignUpSignIn/SignUp";
 import PrivateRoute from "./PrivateRoute";
 

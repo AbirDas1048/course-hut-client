@@ -3,7 +3,7 @@ import { Button, ButtonGroup, Col, Container, Form, Row, Tab, Tabs } from 'react
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 
 const SignUp = () => {
 
@@ -27,14 +27,6 @@ const SignUp = () => {
                 form.reset();
                 setLoginError('');
                 navigate(from, { replace: true });
-                // if (user.emailVerified) {
-                //     navigate(from, { replace: true });
-                // }
-                // else {
-                //     toast.error('Your email is not verified');
-                // }
-
-
 
             })
             .catch(error => {
@@ -85,6 +77,19 @@ const SignUp = () => {
 
     const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                navigate(from, { replace: true });
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    }
+
+    const githubProvider = new GithubAuthProvider();
+
+    const handleGithubSignIn = () => {
+        providerLogin(githubProvider)
             .then(result => {
                 const user = result.user;
                 navigate(from, { replace: true });
@@ -160,7 +165,7 @@ const SignUp = () => {
                         <h4>Or</h4>
                         <ButtonGroup>
                             <Button className='mx-3' variant="outline-primary" onClick={handleGoogleSignIn} ><FaGoogle></FaGoogle> Login with Google</Button>
-                            <Button variant="outline-dark"><FaGithub></FaGithub> Login with Github</Button>
+                            <Button variant="outline-dark" onClick={handleGithubSignIn}><FaGithub></FaGithub> Login with Github</Button>
                         </ButtonGroup>
                     </div>
                 </Col>
