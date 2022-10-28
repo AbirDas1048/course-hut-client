@@ -10,6 +10,7 @@ Live website link [Course Hut](https://course-hut.web.app/).
     * 3 types of firebase authentication Email & Password, Google, Github.
     * Private/Protected route to checkout course.
     * Can generate a pdf of a course details.
+    - Bullet list
 
 ### Packages
 
