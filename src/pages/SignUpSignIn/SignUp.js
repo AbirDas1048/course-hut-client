@@ -3,10 +3,11 @@ import { Button, ButtonGroup, Col, Container, Form, Row, Tab, Tabs } from 'react
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const SignUp = () => {
 
-    const { signIn, setLoading, createUser, updateUserProfile } = useContext(AuthContext);
+    const { signIn, setLoading, createUser, updateUserProfile, providerLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -80,6 +81,19 @@ const SignUp = () => {
             .catch(error => setRegistrationError(error.message));
     }
 
+    const googleProvider = new GoogleAuthProvider();
+
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                navigate(from, { replace: true });
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    }
+
     return (
         <Container className='my-5'>
             <h3 className='text-center text-primary my-3'>SignUp/SignIn</h3>
@@ -145,7 +159,7 @@ const SignUp = () => {
                     <div className='my-3 text-center'>
                         <h4>Or</h4>
                         <ButtonGroup>
-                            <Button className='mx-3' variant="outline-primary"  ><FaGoogle></FaGoogle> Login with Google</Button>
+                            <Button className='mx-3' variant="outline-primary" onClick={handleGoogleSignIn} ><FaGoogle></FaGoogle> Login with Google</Button>
                             <Button variant="outline-dark"><FaGithub></FaGithub> Login with Github</Button>
                         </ButtonGroup>
                     </div>
